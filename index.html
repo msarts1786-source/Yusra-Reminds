@@ -2,608 +2,315 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#D8A7C6">
-<meta name="description" content="Yusra Reminds — Islamic reminders, Quran, Hadith, duas and a community of remembrance.">
-<title>Yusra Reminds | Yusra Reminds ♡</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#D8A7C7">
+<meta name="description" content="Yusra Reminds — Islamic reminders, Quran, Hadith and duas.">
+<title>Yusra Reminds | A Reminder for Every Heart</title>
 
 <style>
-#welcomeScreen {
-  position: fixed !important;
-  inset: 0 !important;
-  width: 100vw;
-  height: 100vh;
-  z-index: 99999 !important;
-  overflow-y: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 :root{
   --bg:#D8A7C7;
-  --bg-deep:#c78fb5;
   --plum:#38243a;
   --plum-soft:#65445f;
   --gold:#a87932;
   --gold-light:#f0d99e;
   --cream:#fff8ee;
   --muted:#725c70;
-  --glass:rgba(255,255,255,.34);
-  --glass-strong:rgba(255,255,255,.48);
   --line:rgba(255,255,255,.58);
   --shadow:0 18px 55px rgba(76,38,70,.14);
 }
-
 *{box-sizing:border-box}
-
-html{
-  scroll-behavior:smooth;
-  scroll-padding-top:90px
-}
-
+html{scroll-behavior:smooth;scroll-padding-top:90px}
 body{
-  margin:0;
-  color:var(--plum);
+  margin:0;color:var(--plum);
   background:
     radial-gradient(ellipse at 10% 5%,rgba(255,255,255,.42),transparent 43%),
     radial-gradient(ellipse at 90% 35%,rgba(255,230,244,.35),transparent 44%),
     linear-gradient(135deg,#D8A7C7 0%,#d5a0c1 48%,#dfb3cf 100%);
   background-attachment:fixed;
   font-family:Georgia,'Times New Roman',serif;
-  line-height:1.65;
-  min-height:100vh;
+  line-height:1.65;min-height:100vh;
 }
-
+body.welcome-open{overflow:hidden}
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer}
 img,video{max-width:100%;display:block}
+.wrap{width:min(1120px,92%);margin:auto}
 
-.wrap{
-  width:min(1120px,92%);
-  margin:auto
-}
-
+/* MAIN WEBSITE HEADER */
 header{
-  position:sticky;
-  top:0;
-  z-index:30;
-  background:rgba(248,231,243,.62);
+  position:sticky;top:0;z-index:30;
+  background:rgba(248,231,243,.72);
   backdrop-filter:blur(22px);
   -webkit-backdrop-filter:blur(22px);
   border-bottom:1px solid rgba(255,255,255,.64);
-  box-shadow:0 8px 30px rgba(73,37,69,.08)
+  box-shadow:0 8px 30px rgba(73,37,69,.08);
 }
-
 .nav{
-  height:78px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px
+  height:78px;display:flex;align-items:center;
+  justify-content:space-between;gap:20px;
 }
-
 .brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  font-size:21px;
-  letter-spacing:.8px;
-  white-space:nowrap
+  display:flex;align-items:center;gap:12px;
+  font-size:21px;letter-spacing:.8px;white-space:nowrap;
 }
-
 .brandmark{
-  width:42px;
-  height:42px;
-  border:1px solid rgba(168,121,50,.72);
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  color:var(--gold);
-  font-size:22px;
-  overflow:hidden;
+  width:42px;height:42px;border:1px solid rgba(168,121,50,.72);
+  border-radius:50%;display:grid;place-items:center;
+  color:var(--gold);font-size:22px;overflow:hidden;
   background:rgba(255,255,255,.45);
-  box-shadow:inset 0 1px 6px rgba(255,255,255,.7)
 }
-
-.brandmark img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  border-radius:50%
-}
-
-.brand b{
-  color:var(--gold);
-  font-weight:normal
-}
-
-.links{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  color:var(--plum-soft);
-  font:13px Arial,sans-serif
-}
-
-.links a{
-  padding:10px 13px;
-  border-radius:30px;
-  transition:.25s ease
-}
-
-.links a:hover{
-  background:rgba(255,255,255,.55);
-  color:var(--gold)
-}
-
+.brandmark img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.brand b{color:var(--gold);font-weight:normal}
+.links{display:flex;align-items:center;gap:7px;color:var(--plum-soft);font:13px Arial,sans-serif}
+.links a{padding:10px 13px;border-radius:30px;transition:.25s}
+.links a:hover{background:rgba(255,255,255,.55);color:var(--gold)}
 .menu{
-  display:none;
-  background:rgba(255,255,255,.42);
-  border:1px solid var(--line);
-  color:var(--plum);
-  padding:8px 13px;
-  border-radius:12px
+  display:none;background:rgba(255,255,255,.42);
+  border:1px solid var(--line);color:var(--plum);
+  padding:8px 13px;border-radius:12px;
 }
 
-.hero{
-  position:relative;
-  overflow:hidden;
-  padding:112px 0 100px;
-  text-align:center
-}
-
+/* HERO */
+.hero{position:relative;overflow:hidden;padding:112px 0 100px;text-align:center}
 .hero:before,.hero:after{
-  content:"";
-  position:absolute;
-  border-radius:50%;
-  filter:blur(2px);
-  pointer-events:none
+  content:"";position:absolute;border-radius:50%;
+  filter:blur(2px);pointer-events:none;
 }
-
 .hero:before{
-  width:320px;
-  height:320px;
-  left:-125px;
-  top:10px;
-  background:radial-gradient(circle,rgba(255,255,255,.34),transparent 70%)
+  width:320px;height:320px;left:-125px;top:10px;
+  background:radial-gradient(circle,rgba(255,255,255,.34),transparent 70%);
 }
-
 .hero:after{
-  width:390px;
-  height:390px;
-  right:-155px;
-  bottom:-100px;
-  background:radial-gradient(circle,rgba(255,239,249,.43),transparent 70%)
+  width:390px;height:390px;right:-155px;bottom:-100px;
+  background:radial-gradient(circle,rgba(255,239,249,.43),transparent 70%);
 }
-
-.hero .wrap{
-  position:relative;
-  z-index:1
-}
-
+.hero .wrap{position:relative;z-index:1}
 .eyebrow,.kicker{
-  font:10px Arial,sans-serif;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  color:var(--gold)
+  font:10px Arial,sans-serif;letter-spacing:3px;
+  text-transform:uppercase;color:var(--gold);
 }
-
 .eyebrow{margin-bottom:19px}
-
 .hero h1{
-  font-size:clamp(44px,7vw,78px);
-  font-weight:normal;
-  line-height:1.08;
-  margin:0 auto 20px;
-  text-shadow:0 4px 22px rgba(255,255,255,.35)
+  font-size:clamp(44px,7vw,78px);font-weight:normal;
+  line-height:1.08;margin:0 auto 20px;
+  text-shadow:0 4px 22px rgba(255,255,255,.35);
 }
-
-.hero h1 span{
-  color:#98672e;
-  font-style:italic
-}
-
+.hero h1 span{color:#98672e;font-style:italic}
 .hero p{
-  color:#60495f;
-  font:15px/1.9 Arial,sans-serif;
-  max-width:650px;
-  margin:0 auto 30px
+  color:#60495f;font:15px/1.9 Arial,sans-serif;
+  max-width:650px;margin:0 auto 30px;
 }
-
-.actions{
-  display:flex;
-  gap:13px;
-  justify-content:center;
-  flex-wrap:wrap
-}
-
+.actions{display:flex;gap:13px;justify-content:center;flex-wrap:wrap}
 .btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:13px 23px;
-  border-radius:30px;
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:13px 23px;border-radius:30px;
   border:1px solid rgba(168,121,50,.68);
-  background:rgba(255,255,255,.34);
-  color:var(--plum);
-  font:11px Arial,sans-serif;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  transition:.28s ease;
-  box-shadow:0 7px 22px rgba(77,38,72,.08)
+  background:rgba(255,255,255,.34);color:var(--plum);
+  font:11px Arial,sans-serif;letter-spacing:1px;
+  text-transform:uppercase;transition:.28s;
+  box-shadow:0 7px 22px rgba(77,38,72,.08);
 }
-
 .btn.primary{
   background:linear-gradient(135deg,#e8cc91,#c99a51);
-  color:#38283a;
-  border-color:rgba(255,255,255,.48)
+  color:#38283a;border-color:rgba(255,255,255,.48);
 }
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(77,38,72,.16)}
+.ornament{color:var(--gold);font-size:23px;margin-top:35px;letter-spacing:12px}
 
-.btn:hover{
-  transform:translateY(-3px);
-  box-shadow:0 12px 28px rgba(77,38,72,.16);
-  background:rgba(255,255,255,.62)
-}
-
-.btn.primary:hover{
-  background:linear-gradient(135deg,#f3dda9,#d5aa65)
-}
-
-.ornament{
-  color:var(--gold);
-  font-size:23px;
-  margin-top:35px;
-  letter-spacing:12px
-}
-
-section{
-  padding:76px 0;
-  position:relative
-}
-
-.section-head{
-  text-align:center;
-  margin-bottom:36px
-}
-
+/* SECTIONS AND CARDS */
+section{padding:76px 0;position:relative}
+.section-head{text-align:center;margin-bottom:36px}
 .section-head h2{
-  font-weight:normal;
-  font-size:clamp(30px,4vw,44px);
-  margin:8px 0;
-  color:var(--plum)
+  font-weight:normal;font-size:clamp(30px,4vw,44px);
+  margin:8px 0;color:var(--plum);
 }
-
-.section-head p{
-  color:var(--muted);
-  font:13px/1.8 Arial,sans-serif;
-  margin:0
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px
-}
-
+.section-head p{color:var(--muted);font:13px/1.8 Arial,sans-serif;margin:0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .card{
-  position:relative;
-  isolation:isolate;
-  overflow:hidden;
+  position:relative;isolation:isolate;overflow:hidden;
   background:linear-gradient(145deg,rgba(255,255,255,.50),rgba(255,255,255,.20));
   border:1px solid rgba(255,255,255,.64);
-  padding:25px;
-  border-radius:23px;
-  min-height:190px;
-  display:flex;
-  flex-direction:column;
-  backdrop-filter:blur(22px);
-  -webkit-backdrop-filter:blur(22px);
+  padding:25px;border-radius:23px;min-height:190px;
+  display:flex;flex-direction:column;
+  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
   box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.75);
-  transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease
+  transition:transform .3s,box-shadow .3s;
 }
-
-.card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 22px 55px rgba(76,38,70,.18),inset 0 1px 0 rgba(255,255,255,.8);
-  border-color:rgba(255,255,255,.9)
-}
-
+.card:hover{transform:translateY(-5px);box-shadow:0 22px 55px rgba(76,38,70,.18)}
 .card .tag{
-  color:var(--gold);
-  font:10px Arial,sans-serif;
-  letter-spacing:1.8px;
-  text-transform:uppercase
+  color:var(--gold);font:10px Arial,sans-serif;
+  letter-spacing:1.8px;text-transform:uppercase;
 }
-
-.card h3{
-  font-size:22px;
-  font-weight:normal;
-  margin:12px 0 8px;
-  color:var(--plum)
-}
-
-.card p{
-  font:13px/1.75 Arial,sans-serif;
-  color:#6d586b;
-  margin:0 0 20px
-}
-
-.card .read{
-  margin-top:auto;
-  color:#93652e;
-  font:12px Arial,sans-serif
-}
-
-.posts-tools{
-  display:flex;
-  justify-content:center;
-  margin:0 auto 25px;
-  max-width:520px
-}
-
+.card h3{font-size:22px;font-weight:normal;margin:12px 0 8px;color:var(--plum)}
+.card p{font:13px/1.75 Arial,sans-serif;color:#6d586b;margin:0 0 20px}
+.card .read{margin-top:auto;color:#93652e;font:12px Arial,sans-serif}
+.posts-tools{display:flex;justify-content:center;margin:0 auto 25px;max-width:520px}
 .posts-tools input{
-  width:100%;
-  padding:14px 18px;
-  background:rgba(255,255,255,.43);
-  border:1px solid rgba(255,255,255,.68);
-  border-radius:30px;
-  color:var(--plum);
-  outline:none;
-  font:14px Arial,sans-serif;
-  box-shadow:inset 0 1px 5px rgba(255,255,255,.45),0 8px 24px rgba(76,38,70,.07)
+  width:100%;padding:14px 18px;background:rgba(255,255,255,.43);
+  border:1px solid rgba(255,255,255,.68);border-radius:30px;
+  color:var(--plum);outline:none;font:14px Arial,sans-serif;
+  box-shadow:inset 0 1px 5px rgba(255,255,255,.45),0 8px 24px rgba(76,38,70,.07);
 }
-
 .posts-tools input::placeholder{color:#856d81}
-
 .community{
   background:rgba(255,255,255,.16);
   border-top:1px solid rgba(255,255,255,.43);
   border-bottom:1px solid rgba(255,255,255,.43);
-  backdrop-filter:blur(10px)
+  backdrop-filter:blur(10px);
 }
-
-.community .card{
-  background:linear-gradient(145deg,rgba(255,255,255,.55),rgba(255,255,255,.25))
-}
-
-.icon{
-  font-size:28px;
-  color:var(--gold);
-  margin-bottom:12px
-}
-
-.about{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:48px;
-  align-items:center
-}
-
+.icon{font-size:28px;color:var(--gold);margin-bottom:12px}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
 .about-art{
-  min-height:320px;
-  border:1px solid rgba(255,255,255,.7);
+  min-height:320px;border:1px solid rgba(255,255,255,.7);
   border-radius:28px;
   background:radial-gradient(circle at 50% 40%,rgba(255,255,255,.62),transparent 45%),linear-gradient(145deg,rgba(255,255,255,.42),rgba(255,255,255,.16));
-  display:grid;
-  place-items:center;
-  text-align:center;
-  padding:30px;
+  display:grid;place-items:center;text-align:center;padding:30px;
   box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.8);
-  backdrop-filter:blur(20px)
+  backdrop-filter:blur(20px);
 }
-
-.about-art .crescent{
-  font-size:100px;
-  color:var(--gold);
-  line-height:1;
-  text-shadow:0 5px 25px rgba(168,121,50,.16)
-}
-
-.about-art small{
-  display:block;
-  color:var(--gold);
-  letter-spacing:3px;
-  font:10px Arial,sans-serif;
-  margin-top:18px
-}
-
-.about-copy h2{
-  font-size:clamp(32px,4vw,43px);
-  font-weight:normal;
-  line-height:1.16;
-  margin:12px 0 18px
-}
-
-.about-copy p{
-  color:#6d586b;
-  font:13px/1.9 Arial,sans-serif
-}
-
+.crescent{font-size:100px;color:var(--gold);line-height:1}
+.about-art small{display:block;color:var(--gold);letter-spacing:3px;font:10px Arial,sans-serif;margin-top:18px}
+.about-copy h2{font-size:clamp(32px,4vw,43px);font-weight:normal;line-height:1.16;margin:12px 0 18px}
+.about-copy p{color:#6d586b;font:13px/1.9 Arial,sans-serif}
 .notice{
-  margin:26px auto 0;
-  padding:12px 16px;
-  border:1px dashed rgba(168,121,50,.48);
-  border-radius:16px;
-  color:#70566a;
-  font:12px/1.6 Arial,sans-serif;
-  text-align:center;
-  background:rgba(255,255,255,.20)
+  margin:26px auto 0;padding:12px 16px;
+  border:1px dashed rgba(168,121,50,.48);border-radius:16px;
+  color:#70566a;font:12px/1.6 Arial,sans-serif;
+  text-align:center;background:rgba(255,255,255,.20);
 }
-
 .post-media{
-  width:100%;
-  max-height:430px;
-  object-fit:cover;
-  border-radius:17px;
-  position:relative;
-  z-index:1;
-  box-shadow:0 12px 30px rgba(54,28,52,.14)
+  width:100%;max-height:430px;object-fit:cover;
+  border-radius:17px;position:relative;z-index:1;
+  box-shadow:0 12px 30px rgba(54,28,52,.14);
 }
-
-#uploadedPosts .card{
-  --photo-glow:216,167,199;
-  padding:15px
-}
-
+#uploadedPosts .card{--photo-glow:216,167,199;padding:15px}
 #uploadedPosts .card:has(.post-media):before{
-  content:"";
-  position:absolute;
-  inset:-28px;
-  z-index:-1;
-  background:
-    radial-gradient(circle at 18% 22%,rgba(var(--photo-glow),.58),transparent 52%),
-    radial-gradient(circle at 85% 80%,rgba(255,255,255,.45),transparent 48%);
-  filter:blur(28px);
-  pointer-events:none
+  content:"";position:absolute;inset:-28px;z-index:-1;
+  background:radial-gradient(circle at 18% 22%,rgba(var(--photo-glow),.58),transparent 52%),radial-gradient(circle at 85% 80%,rgba(255,255,255,.45),transparent 48%);
+  filter:blur(28px);pointer-events:none;
+}
+#uploadedPosts .card h3,#uploadedPosts .card p,#uploadedPosts .card .tag{
+  position:relative;z-index:1;padding-left:8px;padding-right:8px;
 }
 
-#uploadedPosts .card h3,
-#uploadedPosts .card p,
-#uploadedPosts .card .tag{
-  position:relative;
-  z-index:1;
-  padding-left:8px;
-  padding-right:8px
-}
-
-#adminPanel{
-  display:none;
-  padding:70px 0;
-  background:rgba(255,255,255,.18);
-  border-top:1px solid var(--line)
-}
-
+/* ADMIN */
+#adminPanel{display:none;padding:70px 0;background:rgba(255,255,255,.18);border-top:1px solid var(--line)}
 .admin-box{
-  max-width:540px;
-  margin:auto;
-  background:rgba(255,255,255,.43);
-  padding:27px;
-  border:1px solid rgba(255,255,255,.7);
-  border-radius:24px;
-  box-shadow:var(--shadow);
-  backdrop-filter:blur(22px)
+  max-width:540px;margin:auto;background:rgba(255,255,255,.43);
+  padding:27px;border:1px solid rgba(255,255,255,.7);
+  border-radius:24px;box-shadow:var(--shadow);backdrop-filter:blur(22px);
 }
-
-.admin-box h2{
-  font-weight:normal;
-  color:var(--gold)
+.admin-box h2{font-weight:normal;color:var(--gold)}
+.admin-box label{display:block;font:12px Arial,sans-serif;color:var(--plum-soft);margin-top:12px}
+.admin-box input,.admin-box textarea{
+  width:100%;padding:13px;margin:8px 0 15px;
+  background:rgba(255,255,255,.56);border:1px solid rgba(255,255,255,.8);
+  border-radius:13px;color:var(--plum);font:14px Arial,sans-serif;outline:none;
 }
-
-.admin-box label{
-  display:block;
-  font:12px Arial,sans-serif;
-  color:var(--plum-soft);
-  margin-top:12px
-}
-
-.admin-box input,
-.admin-box textarea{
-  width:100%;
-  padding:13px;
-  margin:8px 0 15px;
-  background:rgba(255,255,255,.56);
-  border:1px solid rgba(255,255,255,.8);
-  border-radius:13px;
-  color:var(--plum);
-  font:14px Arial,sans-serif;
-  outline:none
-}
-
-.admin-box textarea{
-  min-height:90px;
-  resize:vertical
-}
-
+.admin-box textarea{min-height:90px;resize:vertical}
 .admin-box button{margin:5px 5px 5px 0}
-
-.admin-status{
-  font:13px/1.6 Arial,sans-serif;
-  color:#76502c;
-  margin-top:12px;
-  overflow-wrap:anywhere
-}
-
+.admin-status{font:13px/1.6 Arial,sans-serif;color:#76502c;margin-top:12px;overflow-wrap:anywhere}
 #uploadArea{display:none}
+#visitorAdmin{display:none;margin-top:25px;padding:18px;border-radius:18px;background:rgba(255,255,255,.55)}
+#visitorNames{font:13px/1.7 Arial,sans-serif;overflow-wrap:anywhere}
+#visitorNames div{padding:8px 0;border-bottom:1px solid #ffffff}
 
+/* FOOTER */
 footer{
-  padding:35px 0;
-  background:rgba(55,34,57,.92);
-  color:var(--cream);
-  border-top:1px solid rgba(255,255,255,.35);
-  backdrop-filter:blur(20px)
+  padding:35px 0;background:rgba(55,34,57,.92);
+  color:var(--cream);border-top:1px solid rgba(255,255,255,.35);
+  backdrop-filter:blur(20px);
 }
-
-.foot{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-  flex-wrap:wrap
-}
-
+.foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
 .foot .brand{color:var(--cream)}
-
-.foot p{
-  font:12px Arial,sans-serif;
-  color:rgba(255,248,238,.74)
-}
-
-.social{
-  display:flex;
-  gap:15px;
-  flex-wrap:wrap;
-  color:var(--gold-light);
-  font:12px Arial,sans-serif
-}
-
+.foot p{font:12px Arial,sans-serif;color:rgba(255,248,238,.74)}
+.social{display:flex;gap:15px;flex-wrap:wrap;color:var(--gold-light);font:12px Arial,sans-serif}
 .social a:hover{color:white}
+footer .brandmark{background:rgba(255,255,255,.08);color:var(--gold-light);border-color:var(--gold-light)}
 
-footer .brandmark{
-  background:rgba(255,255,255,.08);
-  color:var(--gold-light);
-  border-color:var(--gold-light)
+/* WELCOME SCREEN */
+#welcomeScreen{
+  position:fixed;inset:0;width:100%;height:100%;
+  z-index:99999;display:flex;align-items:center;
+  justify-content:center;padding:18px;overflow-y:auto;
+  background:
+    radial-gradient(ellipse at 50% 15%,#e8a6c6 0%,transparent 42%),
+    radial-gradient(ellipse at 10% 90%,#a45b80 0%,transparent 45%),
+    linear-gradient(145deg,#092f29,#164c40 55%,#082b27);
 }
-
+#welcomeScreen.hidden{display:none}
+.welcome-card{
+  width:min(100%,430px);text-align:center;padding:35px 24px;
+  border:1px solid rgba(255,255,255,.3);border-radius:30px;
+  background:linear-gradient(145deg,rgba(255,255,255,.19),rgba(255,255,255,.06));
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  box-shadow:0 25px 70px rgba(0,0,0,.28);color:#fff4e8;
+}
+.welcome-brand{font-size:27px;letter-spacing:2px;color:#f6d9a4}
+.welcome-sub{font-size:10px;letter-spacing:3px;margin:12px 0 35px;color:#f4d7d0}
+.welcome-script{font-family:Georgia,serif;font-size:43px;font-style:italic;color:#f3b8d2;margin:20px 0}
+.welcome-desc{font-size:14px;line-height:1.8;margin:0 auto 24px;max-width:290px}
+#welcomeName{
+  width:100%;padding:16px;border-radius:18px;
+  border:1px solid #ffffff70;background:#ffffff20;
+  color:white;font-size:16px;outline:none;
+  backdrop-filter:blur(12px);text-align:center;
+}
+#welcomeName::placeholder{color:#f4e6e8}
+#welcomeEnter{
+  width:100%;margin-top:14px;padding:16px;border:0;
+  border-radius:18px;background:linear-gradient(135deg,#f4c1d8,#df91b8);
+  color:#44263c;font-weight:bold;font-size:15px;
+  box-shadow:0 8px 25px #0003;
+}
+.welcome-bottom{
+  margin-top:30px;display:flex;justify-content:space-around;
+  font-size:12px;color:#f8dfd4;letter-spacing:1px;
+}
+#welcomeError{font-size:12px;color:#ffd0d0;margin-top:10px}
 @media(max-width:800px){
-  .links{
-    display:none;
-    position:absolute;
-    top:77px;
-    left:0;
-    right:0;
-    background:rgba(248,231,243,.94);
-    padding:16px 4%;
-    flex-direction:column;
-    align-items:stretch;
-    border-bottom:1px solid var(--line);
-    backdrop-filter:blur(20px)
-  }
-
-  .links.open{display:flex}
-  .menu{display:block}
+  .links{display:none;position:absolute;top:77px;left:0;right:0;background:rgba(248,231,243,.96);padding:16px 4%;flex-direction:column;align-items:stretch;border-bottom:1px solid var(--line);backdrop-filter:blur(20px)}
+  .links.open{display:flex}.menu{display:block}
   .grid{grid-template-columns:1fr 1fr}
   .about{grid-template-columns:1fr;gap:28px}
   .hero{padding:78px 0 70px}
 }
-
 @media(max-width:540px){
   .grid{grid-template-columns:1fr}
-  .nav{height:68px}
-  .links{top:67px}
-  .brand{font-size:17px}
-  .brandmark{width:36px;height:36px}
-  .hero{padding:68px 0 58px}
-  .hero p{font-size:14px}
+  .nav{height:68px}.links{top:67px}
+  .brand{font-size:17px}.brandmark{width:36px;height:36px}
+  .hero{padding:68px 0 58px}.hero p{font-size:14px}
   section{padding:58px 0}
   .card{min-height:unset;padding:22px}
   .about-art{min-height:260px}
   .foot{justify-content:center;text-align:center}
   .social{justify-content:center}
+  .welcome-card{padding:30px 20px}
 }
 </style>
 </head>
+<body class="welcome-open">
 
-<body>
+<!-- WELCOME SCREEN: FIRST VISIT ONLY -->
+<div id="welcomeScreen">
+  <div class="welcome-card">
+    <div class="welcome-brand">YUSRA REMINDS</div>
+    <div class="welcome-sub">A JOURNEY TOWARDS ALLAH ♡</div>
+    <div style="font-size:38px">☾</div>
+    <div class="welcome-script">Welcome! ♡</div>
+    <p class="welcome-desc">Before you begin, tell us your name so we can greet you with love. ♡</p>
+    <form id="welcomeForm">
+      <input id="welcomeName" maxlength="40" required placeholder="Enter your name..." autocomplete="nickname">
+      <button id="welcomeEnter" type="submit">Enter Website →</button>
+      <div id="welcomeError"></div>
+    </form>
+    <div class="welcome-bottom">
+      <span>☾ Quran</span><span>✧ Hadith</span><span>♡ Duas</span>
+    </div>
+    <p style="font-size:10px;opacity:.75;margin-top:18px">Your nickname is saved to welcome you.</p>
+  </div>
+</div>
 
 <header>
   <div class="wrap nav">
@@ -613,7 +320,6 @@ footer .brandmark{
       </span>
       <span><b>YUSRA</b> REMINDS</span>
     </a>
-
     <nav class="links" id="navlinks">
       <a href="#home">Home</a>
       <a href="#posts">Latest Reminders</a>
@@ -622,13 +328,11 @@ footer .brandmark{
       <a href="#community">Community</a>
       <a href="#about">About</a>
     </nav>
-
     <button class="menu" id="menubtn" type="button" aria-label="Open menu">☰</button>
   </div>
 </header>
 
 <main>
-
   <section class="hero" id="home">
     <div class="wrap">
       <div class="eyebrow">Faith • Reflection • Remembrance</div>
@@ -649,11 +353,9 @@ footer .brandmark{
         <h2>Latest Reminders</h2>
         <p>Short reads to bring a little reflection into your day.</p>
       </div>
-
       <div class="posts-tools">
         <input id="postSearch" type="search" placeholder="Search reminders..." aria-label="Search posts">
       </div>
-
       <div class="grid" id="postGrid">
         <article class="card post" data-search="patience sabr hardship trust allah">
           <div class="tag">Reflection</div>
@@ -661,14 +363,12 @@ footer .brandmark{
           <p>When life feels heavy, let patience and sincere prayer steady your heart. Keep turning back to Allah.</p>
           <a class="read" href="#about">Read reminder ↗</a>
         </article>
-
         <article class="card post" data-search="gratitude shukr blessings daily">
           <div class="tag">Daily Reminder</div>
           <h3>Notice the Blessings</h3>
           <p>Some blessings are quiet: another morning, a kind word, a chance to begin again. Make room for gratitude.</p>
           <a class="read" href="#about">Read reminder ↗</a>
         </article>
-
         <article class="card post" data-search="dua supplication hope mercy">
           <div class="tag">Dua &amp; Hope</div>
           <h3>Never Stop Making Dua</h3>
@@ -676,7 +376,6 @@ footer .brandmark{
           <a class="read" href="#about">Read reminder ↗</a>
         </article>
       </div>
-
       <p class="notice">Please verify religious references before sharing.</p>
     </div>
   </section>
@@ -687,25 +386,21 @@ footer .brandmark{
         <h2>Latest Posts</h2>
         <p>Our latest pictures and reminders</p>
       </div>
-
       <div class="grid" id="uploadedPosts">
         <article class="card post">
           <img class="post-media" src="Yusra_Reminds_Laptop_Wallpaper_1920x1080-1.png" alt="Yusra Reminds" crossorigin="anonymous">
           <h3>A Reminder for Every Heart</h3>
-          <p>2 November 2026</p>
+          <p>Yusra Reminds</p>
         </article>
       </div>
     </div>
-  </section>
-
-  <section id="channels" class="community">
+  </section>   <section id="channels" class="community">
     <div class="wrap">
       <div class="section-head">
         <div class="kicker">Watch • Follow • Share</div>
         <h2>Our Channels</h2>
         <p>Find Yusra Reminds across your favourite platforms.</p>
       </div>
-
       <div class="grid">
         <div class="card">
           <div class="icon">▶</div>
@@ -714,7 +409,6 @@ footer .brandmark{
           <p>Watch Islamic reminders, shorts and beneficial videos.</p>
           <a class="btn" href="https://youtube.com/@yusra_reminds?si=luWMF_W8CyI6OB6J" target="_blank" rel="noopener">Visit YouTube</a>
         </div>
-
         <div class="card">
           <div class="icon">◎</div>
           <div class="tag">Instagram</div>
@@ -722,7 +416,6 @@ footer .brandmark{
           <p>Follow for visual reminders, updates and new posts.</p>
           <a class="btn" href="https://www.instagram.com/yusra_reminds?srtk=M2k3bGZ2NGZud2xx" target="_blank" rel="noopener">Follow Instagram</a>
         </div>
-
         <div class="card">
           <div class="icon">f</div>
           <div class="tag">Facebook</div>
@@ -741,7 +434,6 @@ footer .brandmark{
         <h2>Join Our Community</h2>
         <p>Stay connected and receive updates and reminders.</p>
       </div>
-
       <div class="grid">
         <div class="card">
           <div class="icon">◉</div>
@@ -750,7 +442,6 @@ footer .brandmark{
           <p>Join the community for shared reminders and announcements.</p>
           <a class="btn" href="https://whatsapp.com/channel/0029VbCNAbM7tkj4TzT3cE1S/0029VbCNAbM7tkj4TzT3cE1S" target="_blank" rel="noopener">Join WhatsApp</a>
         </div>
-
         <div class="card">
           <div class="icon">➤</div>
           <div class="tag">Telegram</div>
@@ -771,7 +462,6 @@ footer .brandmark{
           <small>A REMINDER FOR EVERY HEART</small>
         </div>
       </div>
-
       <div class="about-copy">
         <div class="kicker">Our purpose</div>
         <h2>A little reminder can make a difference.</h2>
@@ -812,14 +502,20 @@ footer .brandmark{
             <input id="mediaFile" type="file" accept="image/*,video/*" required>
             <button class="btn primary" type="submit" id="uploadButton">Upload Post</button>
           </form>
+
           <button class="btn" id="logoutButton" type="button">Logout</button>
+
+          <div id="visitorAdmin">
+            <h2>Visitor Names</h2>
+            <button class="btn" id="visitorRefresh" type="button">Refresh</button>
+            <div id="visitorNames">Loading...</div>
+          </div>
         </div>
 
         <p id="adminStatus" class="admin-status" aria-live="polite"></p>
       </div>
     </div>
   </section>
-
 </main>
 
 <footer>
@@ -828,47 +524,16 @@ footer .brandmark{
       <span class="brandmark">☾</span>
       <span><b>YUSRA</b> REMINDS</span>
     </a>
-
     <p>© <span id="year"></span> Yusra Reminds. Made with purpose.</p>
-
     <div class="social">
       <a href="https://youtube.com/@yusra_reminds?si=luWMF_W8CyI6OB6J" target="_blank" rel="noopener">YouTube</a>
-      <a href="https://www.instagram.com/yusra_reminds?srtk=M2k3bGZ2NGZud2xx" target="_blank" rel="noopene      </div>
+      <a href="https://www.instagram.com/yusra_reminds?srtk=M2k3bGZ2NGZud2xx" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://t.me/" target="_blank" rel="noopener">Telegram</a>
+      <a href="#adminPanel" id="adminLink">Admin</a>
     </div>
-  </section>
-  <section id="community">
-    <div class="wrap">
-      <div class="section-head"><div class="kicker">Grow together</div><h2>Join Our Community</h2><p>Stay connected and receive updates and reminders.</p></div>
-      <div class="grid">
-        <div class="card"><div class="icon">◉</div><div class="tag">WhatsApp</div><h3>WhatsApp Channel</h3><p>Join the community for shared reminders and announcements.</p><a class="btn" href="https://whatsapp.com/channel/0029VbCNAbM7tkj4TzT3cE1S/0029VbCNAbM7tkj4TzT3cE1S" target="_blank" rel="noopener">Join WhatsApp</a></div>
-        <div class="card"><div class="icon">➤</div><div class="tag">Telegram</div><h3>Telegram Channel</h3><p>Get updates, posts and useful content in one place.</p><a class="btn" href="https://t.me/" target="_blank" rel="noopener">Join Telegram</a></div>
-      </div>
-    </div>
-  </section>
-  <section id="about">
-    <div class="wrap about">
-      <div class="about-art"><div><div class="crescent">☾</div><div style="font-size:26px;color:#98672e">Yusra Reminds</div><small>A REMINDER FOR EVERY HEART</small></div></div>
-      <div class="about-copy"><div class="kicker">Our purpose</div><h2>A little reminder can make a difference.</h2><p>Yusra Reminds is a space created to share beneficial Islamic reminders and encourage reflection, learning and connection. Our aim is to make it easier to find our posts, videos and community links in one place.</p><p>We encourage visitors to verify religious references and consult trusted scholars for questions of Islamic rulings.</p><a class="btn" href="#channels">Explore our channels</a></div>
-    </div>
-  </section>
-  <section id="adminPanel">
-    <div class="wrap">
-      <div class="section-head"><div class="kicker">Private access</div><h2>Admin Panel</h2><p>Sign in to publish new photos and videos.</p></div>
-      <div class="admin-box">
-        <div id="loginArea"><h2>Admin Login</h2><form id="loginForm"><label for="adminEmail">Email address</label><input id="adminEmail" type="email" placeholder="Enter admin email" required><label for="adminPassword">Password</label><input id="adminPassword" type="password" placeholder="Enter password" required><button class="btn primary" type="submit">Login</button></form></div>
-        <div id="uploadArea"><h2>Upload New Post</h2><p id="signedInAs" class="admin-status"></p><form id="uploadForm"><label for="caption">Caption</label><textarea id="caption" placeholder="Write a caption..." required></textarea><label for="mediaFile">Select photo or video</label><input id="mediaFile" type="file" accept="image/*,video/*" required><button class="btn primary" type="submit" id="uploadButton">Upload Post</button></form><button class="btn" id="logoutButton" type="button">Logout</button></div>
-        <p id="adminStatus" class="admin-status" aria-live="polite"></p>
-      </div>
-    </div>
-  </section>
-</main>
-<footer>
-  <div class="wrap foot">
-    <a class="brand" href="#home"><span class="brandmark">☾</span><span><b>YUSRA</b> REMINDS</span></a>
-    <p>© <span id="year"></span> Yusra Reminds. Made with purpose.</p>
-    <div class="social"><a href="https://youtube.com/@yusra_reminds?si=luWMF_W8CyI6OB6J" target="_blank" rel="noopener">YouTube</a><a href="https://www.instagram.com/yusra_reminds?srtk=M2k3bGZ2NGZud2xx" target="_blank" rel="noopener">Instagram</a><a href="https://t.me/" target="_blank" rel="noopener">Telegram</a><a href="#admin">Admin</a></div>
   </div>
 </footer>
+
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
@@ -876,270 +541,373 @@ const SUPABASE_URL = 'https://qfrhvhkcdmhfhmfsbnrm.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_ZtjonAtemnzsR1YsySDPFQ__Pw7OCrk';
 const ADMIN_EMAIL = 'msarts1786@gmail.com';
 const BUCKET = 'yusra-posts';
+
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
+/* WELCOME SCREEN: ONLY FIRST VISIT ON THIS BROWSER */
+const welcome = document.getElementById('welcomeScreen');
+const welcomeForm = document.getElementById('welcomeForm');
+const welcomeError = document.getElementById('welcomeError');
+const welcomeKey = 'yusraWelcomeDone_v2';
+
+function closeWelcome(){
+  welcome.classList.add('hidden');
+  document.body.classList.remove('welcome-open');
+}
+
+if(localStorage.getItem(welcomeKey) === 'yes'){
+  closeWelcome();
+}
+
+welcomeForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const nickname = document.getElementById('welcomeName').value.trim();
+  if(!nickname) return;
+
+  const button = document.getElementById('welcomeEnter');
+  button.disabled = true;
+  button.textContent = 'Please wait...';
+  welcomeError.textContent = '';
+
+  try{
+    const { error } = await supabase.from('visitors').insert({
+      nickname: nickname,
+      visitor_key: crypto.randomUUID()
+    });
+
+    if(error) throw error;
+
+    localStorage.setItem(welcomeKey, 'yes');
+    closeWelcome();
+
+  }catch(error){
+    welcomeError.textContent = 'Please try again. ' + error.message;
+  }finally{
+    button.disabled = false;
+    button.textContent = 'Enter Website →';
+  }
+});
+
+/* NAVIGATION */
 const menu = document.getElementById('menubtn');
 const nav = document.getElementById('navlinks');
+
 menu.addEventListener('click', () => nav.classList.toggle('open'));
-nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+nav.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => nav.classList.remove('open'));
+});
+
 document.getElementById('year').textContent = new Date().getFullYear();
 
+/* ADMIN PANEL */
 const adminPanel = document.getElementById('adminPanel');
 const loginArea = document.getElementById('loginArea');
 const uploadArea = document.getElementById('uploadArea');
 const adminStatus = document.getElementById('adminStatus');
-function showAdminPanel(){adminPanel.style.display = location.hash === '#admin' ? 'block' : 'none';}
+const visitorAdmin = document.getElementById('visitorAdmin');
+
+function showAdminPanel(){
+  adminPanel.style.display = location.hash === '#adminPanel' ? 'block' : 'none';
+}
+
+document.getElementById('adminLink').addEventListener('click', () => {
+  setTimeout(showAdminPanel, 0);
+});
+
 window.addEventListener('hashchange', showAdminPanel);
 showAdminPanel();
-function showStatus(message){adminStatus.textContent = message;}
-function showLoggedOut(){loginArea.style.display='block';uploadArea.style.display='none';}
+
+function showStatus(message){
+  adminStatus.textContent = message;
+}
+
+function showLoggedOut(){
+  loginArea.style.display = 'block';
+  uploadArea.style.display = 'none';
+  visitorAdmin.style.display = 'none';
+}
+
 function showLoggedIn(user){
-  if(!user || user.email !== ADMIN_EMAIL){showLoggedOut();return;}
-  loginArea.style.display='none';uploadArea.style.display='block';
-  document.getElementById('signedInAs').textContent='Logged in as: '+user.email;
+  if(!user || user.email !== ADMIN_EMAIL){
+    showLoggedOut();
+    return;
+  }
+
+  loginArea.style.display = 'none';
+  uploadArea.style.display = 'block';
+  document.getElementById('signedInAs').textContent = 'Logged in as: ' + user.email;
+
+  visitorAdmin.style.display = 'block';
+  loadVisitorNames();
 }
+
 async function checkSession(){
-  const {data,error}=await supabase.auth.getSession();
+  const { data, error } = await supabase.auth.getSession();
+
   if(error) showStatus(error.message);
-  const user=data.session?.user;
-  if(user && user.email===ADMIN_EMAIL) showLoggedIn(user);
-  else {if(user) await supabase.auth.signOut();showLoggedOut();}
+
+  const user = data.session?.user;
+
+  if(user && user.email === ADMIN_EMAIL){
+    showLoggedIn(user);
+  }else{
+    if(user) await supabase.auth.signOut();
+    showLoggedOut();
+  }
 }
 
-document.getElementById('loginForm').addEventListener('submit',async event=>{
-  event.preventDefault();showStatus('Logging in...');
-  const email=document.getElementById('adminEmail').value.trim().toLowerCase();
-  const password=document.getElementById('adminPassword').value;
-  if(email!==ADMIN_EMAIL){showStatus('This email is not authorised as admin.');return;}
-  const {data,error}=await supabase.auth.signInWithPassword({email,password});
-  if(error){showStatus('Login failed: '+error.message);return;}
-  showLoggedIn(data.user);showStatus('Login successful.');
+document.getElementById('loginForm').addEventListener('submit', async (event) => {
+  event.preventDefault();
+  showStatus('Logging in...');
+
+  const email = document.getElementById('adminEmail').value.trim().toLowerCase();
+  const password = document.getElementById('adminPassword').value;
+
+  if(email !== ADMIN_EMAIL){
+    showStatus('This email is not authorised as admin.');
+    return;
+  }
+
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+  if(error){
+    showStatus('Login failed: ' + error.message);
+    return;
+  }
+
+  showLoggedIn(data.user);
+  showStatus('Login successful.');
 });
 
-document.getElementById('logoutButton').addEventListener('click',async()=>{
-  await supabase.auth.signOut();showLoggedOut();showStatus('You are logged out.');
+document.getElementById('logoutButton').addEventListener('click', async () => {
+  await supabase.auth.signOut();
+  showLoggedOut();
+  showStatus('You are logged out.');
 });
 
-function setImageGlow(media,card){
-  if(!media || media.tagName!=='IMG') return;
-  const sample=()=>{
-    try{
-      const canvas=document.createElement('canvas');canvas.width=1;canvas.height=1;
-      const ctx=canvas.getContext('2d',{willReadFrequently:true});
-      ctx.drawImage(media,0,0,1,1);
-      const pixel=ctx.getImageData(0,0,1,1).data;
-      card.style.setProperty('--photo-glow',`${pixel[0]},${pixel[1]},${pixel[2]}`);
-    }catch(_error){card.style.setProperty('--photo-glow','216,167,199');}
-  };
-  if(media.complete && media.naturalWidth) sample();
-  else media.addEventListener('load',sample,{once:true});
-}
+/* VISITOR LIST: ADMIN ONLY */
+async function loadVisitorNames(){
+  const box = document.getElementById('visitorNames');
+  box.textContent = 'Loading...';
 
-async function loadPosts(){
-  const container=document.getElementById('uploadedPosts');
-  const {data,error}=await supabase.from('posts').select('id,created_at,caption,media_url,media_type').order('created_at',{ascending:false});
-  if(error){console.error('Could not load posts:',error.message);return;}
-  container.querySelectorAll('[data-dynamic-post="true"]').forEach(card=>card.remove());
-  (data||[]).forEach(post=>{
-    const card=document.createElement('article');card.className='card post';card.dataset.dynamicPost='true';card.dataset.search=(post.caption||'').toLowerCase();
-    const tag=document.createElement('div');tag.className='tag';tag.textContent='Latest Upload';
-    let media;
-    if(post.media_type==='video'){media=document.createElement('video');media.controls=true;media.playsInline=true;media.preload='metadata';}
-    else{media=document.createElement('img');media.alt=post.caption||'Yusra Reminds post';media.crossOrigin='anonymous';}
-    media.src=post.media_url;media.className='post-media';
-    const heading=document.createElement('h3');heading.textContent=post.caption||'Yusra Reminds';
-    const date=document.createElement('p');date.textContent=post.created_at?new Date(post.created_at).toLocaleDateString():'';
-    card.append(tag,media,heading,date);container.insertBefore(card,container.firstChild);setImageGlow(media,card);
+  const { data, error } = await supabase
+    .from('visitors')
+    .select('nickname,visited_at')
+    .order('visited_at', { ascending:false })
+    .limit(100);
+
+  if(error){
+    box.textContent = 'Could not load visitors: ' + error.message;
+    return;
+  }
+
+  box.replaceChildren();
+
+  if(!data || data.length === 0){
+    box.textContent = 'No visitors yet.';
+    return;
+  }
+
+  data.forEach(visitor => {
+    const item = document.createElement('div');
+    const name = document.createElement('strong');
+    const date = document.createElement('small');
+
+    name.textContent = visitor.nickname;
+    date.textContent = new Date(visitor.visited_at).toLocaleString();
+
+    item.append(name, document.createElement('br'), date);
+    box.appendChild(item);
   });
+}
+
+document.getElementById('visitorRefresh').addEventListener('click', loadVisitorNames);
+
+/* POST IMAGE COLOUR GLOW */
+function setImageGlow(media, card){
+  if(!media || media.tagName !== 'IMG') return;
+
+  const sample = () => {
+    try{
+      const canvas = document.createElement('canvas');
+      canvas.width = 1;
+      canvas.height = 1;
+      const ctx = canvas.getContext('2d', { willReadFrequently:true });
+
+      ctx.drawImage(media, 0, 0, 1, 1);
+      const pixel = ctx.getImageData(0, 0, 1, 1).data;
+
+      card.style.setProperty('--photo-glow', `${pixel[0]},${pixel[1]},${pixel[2]}`);
+    }catch(error){
+      card.style.setProperty('--photo-glow', '216,167,199');
+    }
+  };
+
+  if(media.complete && media.naturalWidth){
+    sample();
+  }else{
+    media.addEventListener('load', sample, { once:true });
+  }
+}
+
+/* LOAD POSTS FROM SUPABASE */
+async function loadPosts(){
+  const container = document.getElementById('uploadedPosts');
+
+  const { data, error } = await supabase
+    .from('posts')
+    .select('id,created_at,caption,media_url,media_type')
+    .order('created_at', { ascending:false });
+
+  if(error){
+    console.error('Could not load posts:', error.message);
+    return;
+  }
+
+  container.querySelectorAll('[data-dynamic-post="true"]').forEach(card => card.remove());
+
+  (data || []).forEach(post => {
+    const card = document.createElement('article');
+    card.className = 'card post';
+    card.dataset.dynamicPost = 'true';
+    card.dataset.search = (post.caption || '').toLowerCase();
+
+    const tag = document.createElement('div');
+    tag.className = 'tag';
+    tag.textContent = 'Latest Upload';
+
+    let media;
+
+    if(post.media_type === 'video'){
+      media = document.createElement('video');
+      media.controls = true;
+      media.playsInline = true;
+      media.preload = 'metadata';
+    }else{
+      media = document.createElement('img');
+      media.alt = post.caption || 'Yusra Reminds post';
+      media.crossOrigin = 'anonymous';
+    }
+
+    media.src = post.media_url;
+    media.className = 'post-media';
+
+    const heading = document.createElement('h3');
+    heading.textContent = post.caption || 'Yusra Reminds';
+
+    const date = document.createElement('p');
+    date.textContent = post.created_at
+      ? new Date(post.created_at).toLocaleDateString()
+      : '';
+
+    card.append(tag, media, heading, date);
+    container.insertBefore(card, container.firstChild);
+    setImageGlow(media, card);
+  });
+
   applySearch();
 }
+
+/* SEARCH */
 function applySearch(){
-  const q=document.getElementById('postSearch').value.toLowerCase();
-  document.querySelectorAll('.post').forEach(card=>{
-    const searchText=(card.innerText+' '+(card.dataset.search||'')).toLowerCase();
-    card.style.display=searchText.includes(q)?'flex':'none';
+  const query = document.getElementById('postSearch').value.toLowerCase();
+
+  document.querySelectorAll('.post').forEach(card => {
+    const text = (card.innerText + ' ' + (card.dataset.search || '')).toLowerCase();
+    card.style.display = text.includes(query) ? 'flex' : 'none';
   });
 }
-document.getElementById('postSearch').addEventListener('input',applySearch);
 
-document.getElementById('uploadForm').addEventListener('submit',async event=>{
+document.getElementById('postSearch').addEventListener('input', applySearch);
+
+/* ADMIN UPLOAD */
+document.getElementById('uploadForm').addEventListener('submit', async (event) => {
   event.preventDefault();
-  const button=document.getElementById('uploadButton');
-  const file=document.getElementById('mediaFile').files[0];
-  const caption=document.getElementById('caption').value.trim();
-  if(!file){showStatus('Please select a photo or video.');return;}
-  if(file.size>50*1024*1024){showStatus('File is larger than 50 MB. Please choose a smaller file.');return;}
-  if(!file.type.startsWith('image/')&&!file.type.startsWith('video/')){showStatus('Only image and video files are allowed.');return;}
-  button.disabled=true;button.textContent='Uploading...';showStatus('Please wait, uploading your post...');
+
+  const button = document.getElementById('uploadButton');
+  const file = document.getElementById('mediaFile').files[0];
+  const caption = document.getElementById('caption').value.trim();
+
+  if(!file){
+    showStatus('Please select a photo or video.');
+    return;
+  }
+
+  if(file.size > 50 * 1024 * 1024){
+    showStatus('File is larger than 50 MB. Please choose a smaller file.');
+    return;
+  }
+
+  if(!file.type.startsWith('image/') && !file.type.startsWith('video/')){
+    showStatus('Only image and video files are allowed.');
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = 'Uploading...';
+  showStatus('Please wait, uploading your post...');
+
   try{
-    const {data:sessionData}=await supabase.auth.getSession();
-    const user=sessionData.session?.user;
-    if(!user||user.email!==ADMIN_EMAIL) throw new Error('Please log in with the authorised admin account.');
-    const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
-    const filePath=Date.now()+'-'+crypto.randomUUID()+'-'+safeName;
-    const {error:storageError}=await supabase.storage.from(BUCKET).upload(filePath,file,{contentType:file.type,upsert:false});
+    const { data:sessionData } = await supabase.auth.getSession();
+    const user = sessionData.session?.user;
+
+    if(!user || user.email !== ADMIN_EMAIL){
+      throw new Error('Please log in with the authorised admin account.');
+    }
+
+    const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+    const filePath = Date.now() + '-' + crypto.randomUUID() + '-' + safeName;
+
+    const { error:storageError } = await supabase.storage
+      .from(BUCKET)
+      .upload(filePath, file, { contentType:file.type, upsert:false });
+
     if(storageError) throw storageError;
-    const {data:publicData}=supabase.storage.from(BUCKET).getPublicUrl(filePath);
-    const mediaType=file.type.startsWith('video/')?'video':'image';
-    const {error:insertError}=await supabase.from('posts').insert({caption,media_url:publicData.publicUrl,media_type:mediaType});
-    if(insertError) throw new Error('File uploaded, but saving the post failed: '+insertError.message);
-    document.getElementById('uploadForm').reset();showStatus('Post published successfully!');await loadPosts();
-  }catch(error){showStatus('Upload error: '+error.message);}
-  finally{button.disabled=false;button.textContent='Upload Post';}
+
+    const { data:publicData } = supabase.storage.from(BUCKET).getPublicUrl(filePath);
+    const mediaType = file.type.startsWith('video/') ? 'video' : 'image';
+
+    const { error:insertError } = await supabase.from('posts').insert({
+      caption,
+      media_url:publicData.publicUrl,
+      media_type:mediaType
+    });
+
+    if(insertError){
+      throw new Error('File uploaded, but saving the post failed: ' + insertError.message);
+    }
+
+    document.getElementById('uploadForm').reset();
+    showStatus('Post published successfully!');
+    await loadPosts();
+
+  }catch(error){
+    showStatus('Upload error: ' + error.message);
+  }finally{
+    button.disabled = false;
+    button.textContent = 'Upload Post';
+  }
 });
 
-supabase.auth.onAuthStateChange((_event,session)=>{
-  const user=session?.user;
-  if(user&&user.email===ADMIN_EMAIL) showLoggedIn(user);else showLoggedOut();
+/* AUTH STATE */
+supabase.auth.onAuthStateChange((_event, session) => {
+  const user = session?.user;
+
+  if(user && user.email === ADMIN_EMAIL){
+    showLoggedIn(user);
+  }else{
+    showLoggedOut();
+  }
 });
 
-document.querySelectorAll('#uploadedPosts img.post-media').forEach(img=>setImageGlow(img,img.closest('.card')));
+document.querySelectorAll('#uploadedPosts img.post-media').forEach(img => {
+  setImageGlow(img, img.closest('.card'));
+});
+
 checkSession();
 loadPosts();
 </script>
 
-<style>
-#welcomeScreen{
- position:fixed;inset:0;z-index:99999;display:flex;
- align-items:center;justify-content:center;padding:22px;
- overflow:auto;
- background:
- radial-gradient(ellipse at 50% 15%,#e8a6c6 0%,transparent 42%),
- radial-gradient(ellipse at 10% 90%,#a45b80 0%,transparent 45%),
- linear-gradient(145deg,#092f29,#164c40 55%,#082b27);
-}
-#welcomeScreen.hidden{display:none}
-.welcome-card{
- width:min(100%,430px);text-align:center;padding:35px 24px;
- border:1px solid rgba(255,255,255,.3);border-radius:30px;
- background:linear-gradient(145deg,rgba(255,255,255,.19),rgba(255,255,255,.06));
- backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
- box-shadow:0 25px 70px rgba(0,0,0,.28);color:#fff4e8;
-}
-.welcome-brand{font-size:27px;letter-spacing:2px;color:#f6d9a4}
-.welcome-sub{font-size:10px;letter-spacing:3px;margin:12px 0 35px;color:#f4d7d0}
-.welcome-script{font-family:Georgia,serif;font-size:43px;font-style:italic;color:#f3b8d2;margin:20px 0}
-.welcome-desc{font-size:14px;line-height:1.8;margin:0 auto 24px;max-width:290px}
-#welcomeName{
- width:100%;padding:16px;border-radius:18px;border:1px solid #ffffff70;
- background:#ffffff20;color:white;font-size:16px;outline:none;
- backdrop-filter:blur(12px);text-align:center;
-}
-#welcomeName::placeholder{color:#f4e6e8}
-#welcomeEnter{
- width:100%;margin-top:14px;padding:16px;border:0;border-radius:18px;
- background:linear-gradient(135deg,#f4c1d8,#df91b8);
- color:#44263c;font-weight:bold;font-size:15px;cursor:pointer;
- box-shadow:0 8px 25px #0003;
-}
-.welcome-bottom{margin-top:30px;display:flex;justify-content:space-around;
- font-size:12px;color:#f8dfd4;letter-spacing:1px}
-#welcomeError{font-size:12px;color:#ffd0d0;margin-top:10px}
-#visitorAdmin{
- display:none;position:static;z-index:9998;right:12px;bottom:12px;
- max-width:310px;max-height:55vh;overflow:auto;padding:16px;
- border-radius:20px;background:#fff9;color:#38243a;
- backdrop-filter:blur(20px);box-shadow:0 8px 35px #38243a40;
-}
-#visitorAdmin button{padding:8px 12px;border:0;border-radius:10px}
-</style>
-
-<div id="welcomeScreen">
- <div class="welcome-card">
-  <div class="welcome-brand">YUSRA REMINDS</div>
-  <div class="welcome-sub">A JOURNEY TOWARDS ALLAH ♡</div>
-  <div style="font-size:38px">☾</div>
-  <div class="welcome-script">Welcome! ♡</div>
-  <p class="welcome-desc">Before you begin, tell us your name so we can greet you with love. ♡</p>
-  <form id="welcomeForm">
-   <input id="welcomeName" maxlength="40" required placeholder="Enter your name..." autocomplete="nickname">
-   <button id="welcomeEnter" type="submit">Enter Website →</button>
-   <div id="welcomeError"></div>
-  </form>
-  <div class="welcome-bottom">
-   <span>☾ Quran</span><span>✧ Hadith</span><span>♡ Duas</span>
-  </div>
-  <p style="font-size:10px;opacity:.75;margin-top:18px">Your nickname is saved to welcome you.</p>
- </div>
-</div>
-
-<div id="visitorAdmin">
- <strong>Visitor Names</strong>
- <button id="visitorRefresh">Refresh</button>
- <div id="visitorNames" style="font-size:13px;margin-top:12px">Loading...</div>
-</div>
-
-<script type="module">
-import {createClient} from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
-
-const visitorDB=createClient(
- 'https://qfrhvhkcdmhfhmfsbnrm.supabase.co',
- 'sb_publishable_ZtjonAtemnzsR1YsySDPFQ__Pw7OCrk'
-);
-const ADMIN='msarts1786@gmail.com';
-const welcome=document.getElementById('welcomeScreen');
-const form=document.getElementById('welcomeForm');
-const errorBox=document.getElementById('welcomeError');
-
-if(localStorage.getItem('yusraWelcomeDone')==='yes'){
- welcome.classList.add('hidden');
-}
-
-form.addEventListener('submit',async(e)=>{
- e.preventDefault();
- const nickname=document.getElementById('welcomeName').value.trim();
- if(!nickname)return;
- const btn=document.getElementById('welcomeEnter');
- btn.disabled=true;btn.textContent='Please wait...';
- errorBox.textContent='';
- try{
-  const {error}=await visitorDB.from('visitors').insert({
-   nickname,
-   visitor_key:crypto.randomUUID()
-  });
-  if(error)throw error;
-  localStorage.setItem('yusraWelcomeDone','yes');
-  welcome.classList.add('hidden');
- }catch(err){
-  errorBox.textContent='Please try again. '+err.message;
- }finally{
-  btn.disabled=false;btn.textContent='Enter Website →';
- }
-});
-
-async function loadVisitorNames(){
- const box=document.getElementById('visitorNames');
- box.textContent='Loading...';
- const {data,error}=await visitorDB.from('visitors')
-  .select('nickname,visited_at').order('visited_at',{ascending:false}).limit(100);
- if(error){box.textContent='Could not load visitors.';return;}
- box.innerHTML=data.length?data.map(v=>
-  '<div style="padding:8px 0;border-bottom:1px solid #ddd"><b>'+
-  v.nickname.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))+
-  '</b><br><small>'+new Date(v.visited_at).toLocaleString()+'</small></div>'
- ).join(''):'No visitors yet.';
-}
-
-async function checkVisitorAdmin(){
-  const panel=document.getElementById('visitorAdmin');
-
-  panel.style.display='none';
-
-  const {data}=await visitorDB.auth.getSession();
-  const user=data.session?.user;
-
-  if(user?.email===ADMIN){
-    panel.style.display='block';
-    loadVisitorNames();
-  }else{
-    panel.style.display='none';
-  }
-}
-document.getElementById('visitorRefresh').addEventListener('click',loadVisitorNames);
-visitorDB.auth.onAuthStateChange(()=>checkVisitorAdmin());
-checkVisitorAdmin();
-</script>
-       
-      </body>
-      </html>
-        
+</body>
+  </html>
