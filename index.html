@@ -394,7 +394,26 @@ footer .brandmark{background:rgba(255,255,255,.08);color:var(--gold-light);borde
         </article>
       </div>
     </div>
-  </section>   <section id="channels" class="community">
+
+  </section>  <section id="messages" class="messages-section">
+  <div class="wrap">
+    <div class="messages-card">
+      <h2>Messages ♡</h2>
+      <p>Special updates and reminders for our community.</p>
+
+      <button class="messages-button" id="openMessages" type="button">
+        Open Messages ♡
+      </button>
+
+      <div id="messagesPanel" class="messages-panel" hidden>
+        <button class="messages-button" id="closeMessages" type="button">
+          Close Messages
+        </button>
+        <div id="messagesList"></div>
+      </div>
+    </div>
+  </div>
+  </section> <section id="channels" class="community">
     <div class="wrap">
       <div class="section-head">
         <div class="kicker">Watch • Follow • Share</div>
@@ -504,7 +523,26 @@ footer .brandmark{background:rgba(255,255,255,.08);color:var(--gold-light);borde
           </form>
 
           <button class="btn" id="logoutButton" type="button">Logout</button>
+<div class="admin-box" id="messageAdmin">
+  <h2>Publish a Message</h2>
 
+  <form id="messageForm">
+    <label for="messageTitle">Message Title</label>
+    <input id="messageTitle" type="text" maxlength="90"
+      placeholder="Enter message title" required>
+
+    <label for="messageText">Your Message</label>
+    <textarea id="messageText" maxlength="3000"
+      placeholder="Write your message here..." required></textarea>
+
+    <button class="btn primary" type="submit">
+      Publish Message
+    </button>
+  </form>
+
+  <p id="messageAdminStatus" class="admin-status"></p>
+  <div id="adminMessageList"></div>
+</div>
           <div id="visitorAdmin">
             <h2>Visitor Names</h2>
             <button class="btn" id="visitorRefresh" type="button">Refresh</button>
@@ -640,8 +678,77 @@ function showLoggedIn(user){
 
   visitorAdmin.style.display = 'block';
   loadVisitorNames();
+  loadAdminCommunityMessages();
 }
+  async function loadAdminCommunityMessages(){
+  const list = document.getElementById('adminMessageList');
+  if(!list) return;
 
+  const {data, error} = await supabase
+    .from('community_messages')
+    .select('id,title,message,created_at')
+    .order('created_at', {ascending:false});
+
+  if(error){
+    list.textContent = error.message;
+    return;
+  }
+
+  list.innerHTML = '';
+
+  data.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'message-item';
+
+    const title = document.createElement('h3');
+    title.textContent = item.title;
+
+    const msg = document.createElement('p');
+    msg.textContent = item.message;
+
+    const del = document.createElement('button');
+    del.textContent = 'Delete';
+    del.type = 'button';
+
+    del.onclick = async () => {
+      if(!confirm('Delete this message?')) return;
+      const {error} = await supabase
+        .from('community_messages')
+        .delete()
+        .eq('id', item.id);
+
+      if(error) alert(error.message);
+      else loadAdminCommunityMessages();
+    };
+
+    div.append(title, msg, del);
+    list.appendChild(div);
+  });
+  }
+  document.getElementById('messageForm').addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const title = document.getElementById('messageTitle').value.trim();
+  const message = document.getElementById('messageText').value.trim();
+  const status = document.getElementById('messageAdminStatus');
+
+  if (!title || !message) return;
+
+  status.textContent = 'Publishing...';
+
+  const { error } = await supabase
+    .from('community_messages')
+    .insert({ title, message });
+
+  if (error) {
+    status.textContent = 'Error: ' + error.message;
+    return;
+  }
+
+  status.textContent = 'Message published successfully!';
+  document.getElementById('messageForm').reset();
+  loadAdminCommunityMessages();
+});
 async function checkSession(){
   const { data, error } = await supabase.auth.getSession();
 
@@ -907,6 +1014,67 @@ document.querySelectorAll('#uploadedPosts img.post-media').forEach(img => {
 
 checkSession();
 loadPosts();
+/* COMMUNITY MESSAGES */
+
+const openMessagesBtn = document.getElementById('openMessages');
+const closeMessagesBtn = document.getElementById('closeMessages');
+const messagesPanel = document.getElementById('messagesPanel');
+const messagesList = document.getElementById('messagesList');
+
+async function loadCommunityMessages() {
+  messagesList.textContent = 'Loading messages...';
+
+  const { data, error } = await supabase
+    .from('community_messages')
+    .select('id, title, message, created_at')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    messagesList.textContent = 'Messages load nahi ho paaye.';
+    return;
+  }
+
+  messagesList.replaceChildren();
+
+  if (!data || data.length === 0) {
+    messagesList.textContent = 'Abhi koi message nahi hai. ♡';
+    return;
+  }
+
+  data.forEach((item, index) => {
+    const card = document.createElement('div');
+    card.className = 'message-item';
+
+    const heading = document.createElement('h3');
+    heading.textContent = item.title;
+
+    if (index === 0) {
+      const badge = document.createElement('span');
+      badge.className = 'message-new';
+      badge.textContent = 'NEW';
+      heading.appendChild(badge);
+    }
+
+    const message = document.createElement('p');
+    message.textContent = item.message;
+
+    const date = document.createElement('div');
+    date.className = 'message-date';
+    date.textContent = new Date(item.created_at).toLocaleString();
+
+    card.append(heading, message, date);
+    messagesList.appendChild(card);
+  });
+}
+
+openMessagesBtn.addEventListener('click', async () => {
+  messagesPanel.hidden = false;
+  await loadCommunityMessages();
+});
+
+closeMessagesBtn.addEventListener('click', () => {
+  messagesPanel.hidden = true;
+});
 </script>
 
 </body>
