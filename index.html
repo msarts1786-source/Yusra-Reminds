@@ -209,7 +209,44 @@ footer {
     padding: 12px 15px;
   }
 }
-  </style></head>
+  <style>
+/* POST CARDS - AMBIENT COLOUR GLOW */
+
+.card:has(img),
+.card:has(video) {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 15% 20%, rgba(218,163,104,.24), transparent 55%),
+    radial-gradient(ellipse at 85% 85%, rgba(143,103,73,.20), transparent 55%),
+    rgba(255,255,255,.055) !important;
+  box-shadow:
+    0 0 45px rgba(204,151,99,.16),
+    0 20px 60px rgba(0,0,0,.25),
+    inset 0 1px 0 rgba(255,255,255,.12) !important;
+}
+
+.card:has(img)::before,
+.card:has(video)::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 25% 30%, rgba(230,169,108,.22), transparent 55%),
+    radial-gradient(circle at 80% 75%, rgba(120,155,115,.16), transparent 55%);
+  filter: blur(35px);
+  pointer-events: none;
+}
+
+.card img,
+.card video {
+  border-radius: 16px;
+  box-shadow: 0 0 32px rgba(218,163,104,.17);
+}
+</style>
+</head>
 <body>
 
 <header>
