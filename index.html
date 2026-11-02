@@ -1110,12 +1110,19 @@ async function loadVisitorNames(){
 }
 
 async function checkVisitorAdmin(){
- const {data}=await visitorDB.auth.getSession();
- const user=data.session?.user;
- if(user?.email===ADMIN){
-  document.getElementById('visitorAdmin').style.display='block';
-  loadVisitorNames();
- }
+  const panel=document.getElementById('visitorAdmin');
+
+  panel.style.display='none';
+
+  const {data}=await visitorDB.auth.getSession();
+  const user=data.session?.user;
+
+  if(user?.email===ADMIN){
+    panel.style.display='block';
+    loadVisitorNames();
+  }else{
+    panel.style.display='none';
+  }
 }
 document.getElementById('visitorRefresh').addEventListener('click',loadVisitorNames);
 visitorDB.auth.onAuthStateChange(()=>checkVisitorAdmin());
