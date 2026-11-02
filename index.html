@@ -468,4 +468,31 @@ document.getElementById('uploadForm').addEventListener('submit', async event => 
 
     if (insertError) {
       throw new Error('File uploaded, but saving the post failed: ' + insertError.message);
- 
+     }
+
+    document.getElementById('uploadForm').reset();
+    showStatus('Post published successfully!');
+    await loadPosts();
+
+  } catch (error) {
+    showStatus('Upload error: ' + error.message);
+  } finally {
+    button.disabled = false;
+    button.textContent = 'Upload Post';
+  }
+});
+
+supabase.auth.onAuthStateChange((_event, session) => {
+  const user = session?.user;
+  if (user && user.email === ADMIN_EMAIL) {
+    showLoggedIn(user);
+  } else {
+    showLoggedOut();
+  }
+});
+
+checkSession();
+loadPosts();
+</script>
+</body>
+</html>
