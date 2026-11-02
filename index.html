@@ -986,6 +986,142 @@ document.querySelectorAll('#uploadedPosts img.post-media').forEach(img=>setImage
 checkSession();
 loadPosts();
 </script>
-</body>
+
+<style>
+#welcomeScreen{
+ position:fixed;inset:0;z-index:99999;display:flex;
+ align-items:center;justify-content:center;padding:22px;
+ overflow:auto;
+ background:
+ radial-gradient(ellipse at 50% 15%,#e8a6c6 0%,transparent 42%),
+ radial-gradient(ellipse at 10% 90%,#a45b80 0%,transparent 45%),
+ linear-gradient(145deg,#092f29,#164c40 55%,#082b27);
+}
+#welcomeScreen.hidden{display:none}
+.welcome-card{
+ width:min(100%,430px);text-align:center;padding:35px 24px;
+ border:1px solid rgba(255,255,255,.3);border-radius:30px;
+ background:linear-gradient(145deg,rgba(255,255,255,.19),rgba(255,255,255,.06));
+ backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+ box-shadow:0 25px 70px rgba(0,0,0,.28);color:#fff4e8;
+}
+.welcome-brand{font-size:27px;letter-spacing:2px;color:#f6d9a4}
+.welcome-sub{font-size:10px;letter-spacing:3px;margin:12px 0 35px;color:#f4d7d0}
+.welcome-script{font-family:Georgia,serif;font-size:43px;font-style:italic;color:#f3b8d2;margin:20px 0}
+.welcome-desc{font-size:14px;line-height:1.8;margin:0 auto 24px;max-width:290px}
+#welcomeName{
+ width:100%;padding:16px;border-radius:18px;border:1px solid #ffffff70;
+ background:#ffffff20;color:white;font-size:16px;outline:none;
+ backdrop-filter:blur(12px);text-align:center;
+}
+#welcomeName::placeholder{color:#f4e6e8}
+#welcomeEnter{
+ width:100%;margin-top:14px;padding:16px;border:0;border-radius:18px;
+ background:linear-gradient(135deg,#f4c1d8,#df91b8);
+ color:#44263c;font-weight:bold;font-size:15px;cursor:pointer;
+ box-shadow:0 8px 25px #0003;
+}
+.welcome-bottom{margin-top:30px;display:flex;justify-content:space-around;
+ font-size:12px;color:#f8dfd4;letter-spacing:1px}
+#welcomeError{font-size:12px;color:#ffd0d0;margin-top:10px}
+#visitorAdmin{
+ display:none;position:fixed;z-index:9998;right:12px;bottom:12px;
+ max-width:310px;max-height:55vh;overflow:auto;padding:16px;
+ border-radius:20px;background:#fff9;color:#38243a;
+ backdrop-filter:blur(20px);box-shadow:0 8px 35px #38243a40;
+}
+#visitorAdmin button{padding:8px 12px;border:0;border-radius:10px}
+</style>
+
+<div id="welcomeScreen">
+ <div class="welcome-card">
+  <div class="welcome-brand">YUSRA REMINDS</div>
+  <div class="welcome-sub">A JOURNEY TOWARDS ALLAH ♡</div>
+  <div style="font-size:38px">☾</div>
+  <div class="welcome-script">Welcome! ♡</div>
+  <p class="welcome-desc">Before you begin, tell us your name so we can greet you with love. ♡</p>
+  <form id="welcomeForm">
+   <input id="welcomeName" maxlength="40" required placeholder="Enter your name..." autocomplete="nickname">
+   <button id="welcomeEnter" type="submit">Enter Website →</button>
+   <div id="welcomeError"></div>
+  </form>
+  <div class="welcome-bottom">
+   <span>☾ Quran</span><span>✧ Hadith</span><span>♡ Duas</span>
+  </div>
+  <p style="font-size:10px;opacity:.75;margin-top:18px">Your nickname is saved to welcome you.</p>
+ </div>
+</div>
+
+<div id="visitorAdmin">
+ <strong>Visitor Names</strong>
+ <button id="visitorRefresh">Refresh</button>
+ <div id="visitorNames" style="font-size:13px;margin-top:12px">Loading...</div>
+</div>
+
+<script type="module">
+import {createClient} from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+const visitorDB=createClient(
+ 'https://qfrhvhkcdmhfhmfsbnrm.supabase.co',
+ 'sb_publishable_ZtjonAtemnzsR1YsySDPFQ__Pw7OCrk'
+);
+const ADMIN='msarts1786@gmail.com';
+const welcome=document.getElementById('welcomeScreen');
+const form=document.getElementById('welcomeForm');
+const errorBox=document.getElementById('welcomeError');
+
+if(localStorage.getItem('yusraWelcomeDone')==='yes'){
+ welcome.classList.add('hidden');
+}
+
+form.addEventListener('submit',async(e)=>{
+ e.preventDefault();
+ const nickname=document.getElementById('welcomeName').value.trim();
+ if(!nickname)return;
+ const btn=document.getElementById('welcomeEnter');
+ btn.disabled=true;btn.textContent='Please wait...';
+ errorBox.textContent='';
+ try{
+  const {error}=await visitorDB.from('visitors').insert({
+   nickname,
+   visitor_key:crypto.randomUUID()
+  });
+  if(error)throw error;
+  localStorage.setItem('yusraWelcomeDone','yes');
+  welcome.classList.add('hidden');
+ }catch(err){
+  errorBox.textContent='Please try again. '+err.message;
+ }finally{
+  btn.disabled=false;btn.textContent='Enter Website →';
+ }
+});
+
+async function loadVisitorNames(){
+ const box=document.getElementById('visitorNames');
+ box.textContent='Loading...';
+ const {data,error}=await visitorDB.from('visitors')
+  .select('nickname,visited_at').order('visited_at',{ascending:false}).limit(100);
+ if(error){box.textContent='Could not load visitors.';return;}
+ box.innerHTML=data.length?data.map(v=>
+  '<div style="padding:8px 0;border-bottom:1px solid #ddd"><b>'+
+  v.nickname.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))+
+  '</b><br><small>'+new Date(v.visited_at).toLocaleString()+'</small></div>'
+ ).join(''):'No visitors yet.';
+}
+
+async function checkVisitorAdmin(){
+ const {data}=await visitorDB.auth.getSession();
+ const user=data.session?.user;
+ if(user?.email===ADMIN){
+  document.getElementById('visitorAdmin').style.display='block';
+  loadVisitorNames();
+ }
+}
+document.getElementById('visitorRefresh').addEventListener('click',loadVisitorNames);
+visitorDB.auth.onAuthStateChange(()=>checkVisitorAdmin());
+checkVisitorAdmin();
+</script>
+       
+      </body>
       </html>
         
