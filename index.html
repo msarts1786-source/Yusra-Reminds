@@ -288,6 +288,118 @@ footer .brandmark{background:rgba(255,255,255,.08);color:var(--gold-light);borde
   .social{justify-content:center}
   .welcome-card{padding:30px 20px}
 }
+
+/* PREMIUM LIQUID GLASS MESSAGES */
+.messages-section{
+  background:transparent !important;
+}
+
+.messages-card{
+  position:relative;
+  overflow:hidden;
+  padding:35px 28px;
+  border-radius:32px;
+  border:1px solid rgba(255,255,255,.72);
+  background:
+    radial-gradient(ellipse at 15% 0%,rgba(255,255,255,.65),transparent 48%),
+    linear-gradient(135deg,rgba(255,255,255,.38),rgba(255,255,255,.12));
+  backdrop-filter:blur(28px) saturate(165%);
+  -webkit-backdrop-filter:blur(28px) saturate(165%);
+  box-shadow:
+    0 0 28px rgba(255,255,255,.32),
+    0 15px 45px rgba(110,55,100,.13),
+    inset 0 1px 2px rgba(255,255,255,.9),
+    inset 0 -1px 2px rgba(255,255,255,.25);
+}
+
+.messages-card h2{
+  color:var(--plum);
+  font-size:34px;
+  font-weight:normal;
+  margin:0 0 12px;
+  text-shadow:0 0 18px rgba(255,255,255,.8);
+}
+
+.messages-card > p{
+  color:var(--plum-soft);
+}
+
+.messages-button{
+  margin:10px 8px 10px 0;
+  padding:13px 23px;
+  border-radius:30px;
+  border:1px solid rgba(255,255,255,.85);
+  color:var(--plum);
+  background:linear-gradient(135deg,rgba(255,255,255,.62),rgba(255,255,255,.20));
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:0 5px 22px rgba(255,255,255,.30),
+             inset 0 1px 2px rgba(255,255,255,.9);
+}
+
+.messages-button:active{
+  transform:scale(.97);
+}
+
+.messages-panel[hidden]{
+  display:none !important;
+}
+
+.messages-panel{
+  margin-top:22px;
+  padding:20px;
+  border-radius:25px;
+  border:1px solid rgba(255,255,255,.65);
+  background:rgba(255,255,255,.19);
+  backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+  box-shadow:inset 0 1px 2px rgba(255,255,255,.7);
+}
+
+.message-item{
+  margin:14px 0;
+  padding:22px;
+  border-radius:23px;
+  border:1px solid rgba(255,255,255,.78);
+  background:linear-gradient(145deg,rgba(255,255,255,.57),rgba(255,255,255,.20));
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  box-shadow:0 0 25px rgba(255,255,255,.35),
+             0 10px 28px rgba(95,45,85,.10),
+             inset 0 1px 2px rgba(255,255,255,.9);
+}
+
+.message-item h3{
+  color:var(--gold);
+  font-size:23px;
+  font-weight:normal;
+  margin:0 0 12px;
+}
+
+.message-item p{
+  color:var(--plum);
+  overflow-wrap:anywhere;
+}
+
+.message-date{
+  color:var(--muted);
+  font:11px Arial,sans-serif;
+  margin-top:14px;
+}
+
+.message-new{
+  display:inline-block;
+  margin-left:10px;
+  padding:3px 9px;
+  border-radius:20px;
+  color:#70405f;
+  background:rgba(255,255,255,.75);
+  border:1px solid rgba(255,255,255,.9);
+  font:9px Arial,sans-serif;
+  letter-spacing:1px;
+  vertical-align:middle;
+    }
+                    
 </style>
 </head>
 <body class="welcome-open">
